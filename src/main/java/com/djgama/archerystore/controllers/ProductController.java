@@ -1,8 +1,10 @@
 package com.djgama.archerystore.controllers;
 
+import com.djgama.archerystore.models.LoginUser;
 import com.djgama.archerystore.models.Product;
 import com.djgama.archerystore.services.CategoryService;
 import com.djgama.archerystore.services.ProductService;
+import com.djgama.archerystore.services.UserService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,10 +19,12 @@ import java.util.Arrays;
 public class ProductController {
 	private final ProductService productServ;
 	private final CategoryService categoryServ;
+	private final UserService userServ;
 
-	public ProductController(ProductService productServ, CategoryService categoryServ) {
+	public ProductController(ProductService productServ, CategoryService categoryServ, UserService userServ) {
 		this.productServ = productServ;
 		this.categoryServ = categoryServ;
+		this.userServ = userServ;
 	}
 
 	@GetMapping("/{id}")
@@ -31,6 +35,7 @@ public class ProductController {
 //		descList.forEach((item) -> System.out.println(item));
 		model.addAttribute("product", product);
 		model.addAttribute("descriptionList", descList);
+		model.addAttribute("newLogin", new LoginUser());
 		return "show-product.jsp";
 	}
 

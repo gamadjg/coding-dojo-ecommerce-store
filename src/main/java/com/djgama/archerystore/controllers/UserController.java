@@ -23,14 +23,15 @@ public class UserController{
 		this.userServ = userServ;
 	}
 
-	@GetMapping("/register")
-	public String register(Model model){
+	@GetMapping("/login/register")
+	public String loginReg(Model model) {
 		model.addAttribute("newUser", new User());
-		return "register.jsp";
+		model.addAttribute("newLogin", new LoginUser());
+		return "loginReg.jsp";
 	}
 
-	@PostMapping("/register")
-	public String processRegister(@Valid @ModelAttribute("newUSer") User newUser, BindingResult result, HttpSession session, Model model){
+	@PostMapping("/login/register")
+	public String register(@Valid @ModelAttribute("newUser") User newUser, BindingResult result, HttpSession session, Model model) {
 		// Check email
 		if(userServ.getUser(newUser.getEmail()) != null) {
 			result.rejectValue("email", "unique", "Email already exists.");
@@ -48,6 +49,25 @@ public class UserController{
 
 		User user = userServ.registerUser(newUser);
 		session.setAttribute("user_id", user.getId());
-		return "redirect: /";
+		return "redirect:/";
+	}
+
+	@PostMapping("/login")
+	public String login(@Valid @ModelAttribute("newLogin") LoginUser newLogin, BindingResult result, HttpSession session, Model model) {
+		User user = userServ.loginUser(newLogin, result);
+		if(result.hasErrors()) {
+			model.addAttribute("newUser", new User());
+			return "loginReg.jsp";
+		}
+		session.setAttribute("user_id", user.getId());
+		return "redirect:/";
+	}
+
+	@GetMapping("/logout")
+	public String logout(HttpSession session){
+		if(session.getAttribute("user_id") != null) {
+			session.removeAttribute("user_id");
+		}
+		return "redirect:/users/login/register";
 	}
 }

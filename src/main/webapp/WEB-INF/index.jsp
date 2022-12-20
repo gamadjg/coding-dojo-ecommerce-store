@@ -7,18 +7,19 @@
 <head>
     <meta charset="UTF-8"/>
     <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://unpkg.com/flowbite@1.5.5/dist/flowbite.min.css" />
     <title>Products</title>
 </head>
 <body class="m-0 p-0">
-    <div class="flex flex-row justify-between items-center bg-gray-700 pt-1 pb-1 pl-10 pr-10">
+    <div class="flex flex-row justify-between items-center bg-gray-700 pt-1 pb-1 pl-10 pr-10 w-screen">
             <h1 class="text-4xl font-bold">
                 <a href="/products" class="font-bold text-gray-400">
                     Quiver Me This
                 </a>
             </h1>
         <div class="flex flex-row gap-5">
-<%--            <a href="/" class="underline text-blue-500 font-bold">Dashboard</a>--%>
-            <a href="/users/register" class="font-bold text-gray-400">Register</a>
+<%--        <a href="/" class="underline text-blue-500 font-bold">Dashboard</a>--%>
+            <a href="/users/login/register" class="block text-white font-medium text-sm px-5 py-2.5 text-center">Login / Register</a>
         </div>
     </div>
     <div class="m-auto">
@@ -52,5 +53,6 @@
             </a>
         </c:forEach>
     </div>
+    <script src="https://unpkg.com/flowbite@1.5.5/dist/flowbite.js"></script>
 </body>
 </html>

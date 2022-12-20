@@ -21,6 +21,7 @@
         <div class="flex flex-row gap-5">
             <a href="/" class="font-bold text-gray-400">Home</a>
             <a href="/users/register" class="font-bold text-gray-400">Register</a>
+
         </div>
     </div>
     <div class="m-auto">
