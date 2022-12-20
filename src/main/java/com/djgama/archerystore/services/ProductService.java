@@ -21,20 +21,41 @@ public class ProductService {
 	}
 
 	public Product findOne(Long id) {
-		Optional<Product> question = productRepo.findById(id);
-		return question.orElse(null);
+		Optional<Product> possibleProduct = productRepo.findById(id);
+		if(!possibleProduct.isPresent()){
+			return null;
+		}else {
+			Product product = possibleProduct.get();
+			product.setDescription(refactorDescription(product.getDescription()));
+			System.out.println(product.getDescription());
+			return product;
+		}
 	}
 
-	public Product persistOne(Product question) {
-		return productRepo.save(question);
+	public Product persistOne(Product product) {
+		return productRepo.save(product);
 	}
 
-	public Product updateOne(Product question) {
-		return productRepo.save(question);
+	public Product updateOne(Product product) {
+		return productRepo.save(product);
 	}
 
 	public void deleteOne(Long id) {
 		productRepo.deleteById(id);
 	}
 
+	public String refactorDescription(String originalDesc){
+		String newDesc;
+		if(originalDesc.charAt(0) == '"'){
+			newDesc = originalDesc.substring(1, originalDesc.length()-1);
+//			originalDesc = new String(originalDesc.substring(1, originalDesc.length()-1));
+		}else{
+			newDesc = originalDesc;
+		}
+		return newDesc
+				.replace("\"\"", "\"")
+				.replace("!!!", "/n")
+				.replace("??", ",")
+				.replace("##", ";");
+	}
 }
