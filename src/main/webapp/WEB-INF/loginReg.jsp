@@ -16,9 +16,9 @@
                 Quiver Me This
             </a>
         </h1>
-        <div class="flex flex-row gap-5">
-            <a href="/" class="block text-white font-medium text-sm px-5 py-2.5 text-center">Home</a>
-            <a href="/users/login/register" class="block text-white font-medium text-sm px-5 py-2.5 text-center">Login / Register</a>
+        <div class="flex flex-row gap-1">
+            <a href="/" class="block text-white font-medium text-sm px-2 py-2 text-center">Home</a>
+            <a href="/users/login/register" class="block text-white font-medium text-sm px-2 py-2 text-center">Login / Register</a>
         </div>
     </div>
     <div class="m-auto">

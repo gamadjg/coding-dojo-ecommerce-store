@@ -12,16 +12,22 @@
 </head>
 
 <body class="m-0 p-0">
-    <div class="flex flex-row justify-between items-center bg-gray-700 pt-1 pb-1 pl-10 pr-10">
+    <div class="flex flex-row justify-between items-center bg-gray-700 pt-1 pb-1 pl-10 pr-10 w-screen">
         <h1 class="text-4xl font-bold">
-            <a href="/products" class="font-bold text-gray-400">
+            <a href="/products" class="font-bold text-white">
                 Quiver Me This
             </a>
         </h1>
-        <div class="flex flex-row gap-5">
-            <a href="/" class="font-bold text-gray-400">Home</a>
-            <a href="/users/register" class="font-bold text-gray-400">Register</a>
-
+        <div class="flex flex-row gap-1 justify-end">
+            <a href="/" class="block text-white font-medium text-sm px-2 py-2 text-center">Home</a>
+            <c:choose>
+                <c:when test="${sessionScope.user_id != null}">
+                    <a href="/users/logout" class="block text-white font-medium text-sm px-2 py-2 text-center">Logout</a>
+                </c:when>
+                <c:otherwise>
+                    <a href="/users/login/register" class="block text-white font-medium text-sm px-2 py-2 text-center">Login / Register</a>
+                </c:otherwise>
+            </c:choose>
         </div>
     </div>
     <div class="m-auto">

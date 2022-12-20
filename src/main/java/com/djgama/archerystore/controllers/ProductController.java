@@ -2,6 +2,7 @@ package com.djgama.archerystore.controllers;
 
 import com.djgama.archerystore.models.LoginUser;
 import com.djgama.archerystore.models.Product;
+import com.djgama.archerystore.models.User;
 import com.djgama.archerystore.services.CategoryService;
 import com.djgama.archerystore.services.ProductService;
 import com.djgama.archerystore.services.UserService;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -26,25 +28,30 @@ public class ProductController {
 		this.categoryServ = categoryServ;
 		this.userServ = userServ;
 	}
+	@GetMapping("")
+	public String allProducts(Model model, HttpSession session){
+		User user = new User();
+		if(session.getAttribute("user_id") != null) {
+			user = userServ.getUser((Long)session.getAttribute("user_id"));
+		}
+		System.out.println(user.getName());
+		model.addAttribute("user", user);
+		model.addAttribute("products", productServ.findAll());
+		model.addAttribute("categories", categoryServ.findAll());
+		return "index.jsp";
+	}
 
 	@GetMapping("/{id}")
 	public String showProduct(Model model, @PathVariable("id") Long id){
 		Product product = productServ.findOne(id);
 		String[] strSplit = product.getDescription().split("/n");
 		ArrayList<String> descList = new ArrayList<String>(Arrays.asList(strSplit));
-//		descList.forEach((item) -> System.out.println(item));
 		model.addAttribute("product", product);
 		model.addAttribute("descriptionList", descList);
 		model.addAttribute("newLogin", new LoginUser());
 		return "show-product.jsp";
 	}
 
-	@GetMapping("")
-	public String allProducts(Model model){
-		model.addAttribute("products", productServ.findAll());
-		model.addAttribute("categories", categoryServ.findAll());
-		return "index.jsp";
-	}
 
 	@GetMapping("/bows")
 	public String getBows(Model model){

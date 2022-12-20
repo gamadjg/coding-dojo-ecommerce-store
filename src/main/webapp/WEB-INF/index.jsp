@@ -12,14 +12,30 @@
 </head>
 <body class="m-0 p-0">
     <div class="flex flex-row justify-between items-center bg-gray-700 pt-1 pb-1 pl-10 pr-10 w-screen">
-            <h1 class="text-4xl font-bold">
-                <a href="/products" class="font-bold text-gray-400">
-                    Quiver Me This
+            <div class="flex flex-row items-baseline gap-5">
+                <a href="/products">
+                    <h1 class="font-bold text-white text-4xl">
+                        Quiver Me This
+                    </h1>
                 </a>
-            </h1>
-        <div class="flex flex-row gap-5">
-<%--        <a href="/" class="underline text-blue-500 font-bold">Dashboard</a>--%>
-            <a href="/users/login/register" class="block text-white font-medium text-sm px-5 py-2.5 text-center">Login / Register</a>
+                <c:choose>
+                    <c:when test="${sessionScope.user_id != null}">
+                        <p class="font-bold text-white text-3xl">
+                                Welcome <c:out value="${user.name}"/>!
+                        </p>
+                    </c:when>
+                </c:choose>
+            </div>
+        <div class="flex flex-row gap-1">
+            <a href="/" class="block text-white font-medium text-sm px-2 py-2 text-center">Home</a>
+            <c:choose>
+                <c:when test="${sessionScope.user_id != null}">
+                    <a href="/users/logout" class="block text-white font-medium text-sm px-2 py-2 text-center">Logout</a>
+                </c:when>
+                <c:otherwise>
+                    <a href="/users/login/register" class="block text-white font-medium text-sm px-2 py-2 text-center">Login / Register</a>
+                </c:otherwise>
+            </c:choose>
         </div>
     </div>
     <div class="m-auto">
