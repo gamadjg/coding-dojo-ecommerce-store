@@ -23,6 +23,12 @@ public class UserController{
 		this.userServ = userServ;
 	}
 
+	@GetMapping("/cart")
+	public String shoppingCart(){
+		return "showProduct.jsp";
+	}
+
+
 	@GetMapping("/login/register")
 	public String loginReg(Model model) {
 		model.addAttribute("newUser", new User());

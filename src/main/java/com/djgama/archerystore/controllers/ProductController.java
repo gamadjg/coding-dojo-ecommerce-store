@@ -1,5 +1,6 @@
 package com.djgama.archerystore.controllers;
 
+import com.djgama.archerystore.models.Category;
 import com.djgama.archerystore.models.LoginUser;
 import com.djgama.archerystore.models.Product;
 import com.djgama.archerystore.models.User;
@@ -41,7 +42,7 @@ public class ProductController {
 		return "index.jsp";
 	}
 
-	@GetMapping("/{id}")
+	@GetMapping("/product/{id}")
 	public String showProduct(Model model, @PathVariable("id") Long id){
 		Product product = productServ.findOne(id);
 		String[] strSplit = product.getDescription().split("/n");
@@ -53,19 +54,10 @@ public class ProductController {
 	}
 
 
-	@GetMapping("/bows")
-	public String getBows(Model model){
-		return null;
+	@GetMapping("/{category}")
+	public String getCategory(@PathVariable("category") String categoryName, Model model){
+		Category category = categoryServ.findOnebyName(categoryName);
+		model.addAttribute("products", productServ.findByCategory(category));
+		return "showCategory.jsp";
 	}
-
-	@GetMapping("/arrows")
-	public String getArrows(Model model){
-		return null;
-	}
-
-	@GetMapping("/targets")
-	public String getTargets(Model model){
-		return null;
-	}
-
 }

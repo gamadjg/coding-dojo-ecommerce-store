@@ -7,6 +7,7 @@
 <head>
     <meta charset="UTF-8"/>
     <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://kit.fontawesome.com/38da9ec89a.js" crossorigin="anonymous"></script>
     <title>Login & Registration</title>
 </head>
 <body class="m-0 p-0">
@@ -16,9 +17,12 @@
                 Quiver Me This
             </a>
         </h1>
-        <div class="flex flex-row gap-1">
+        <div class="flex flex-row gap-1 items-center">
             <a href="/" class="block text-white font-medium text-sm px-2 py-2 text-center">Home</a>
             <a href="/users/login/register" class="block text-white font-medium text-sm px-2 py-2 text-center">Login / Register</a>
+        <a href="/users/cart">
+            <i class="fa-solid fa-cart-shopping text-white"></i>
+        </a>
         </div>
     </div>
     <div class="m-auto">
@@ -29,7 +33,7 @@
             <a href="/products/arrows" class="font-bold">
                 Arrows
             </a>
-            <a href="/products/targets" class="font-bold">
+            <a href="/products/archery%20targets" class="font-bold">
                 Targets
             </a>
         </div>

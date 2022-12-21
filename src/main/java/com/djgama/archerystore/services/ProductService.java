@@ -2,6 +2,7 @@ package com.djgama.archerystore.services;
 
 import com.djgama.archerystore.models.Category;
 import com.djgama.archerystore.models.Product;
+import com.djgama.archerystore.repositories.CategoryRepository;
 import com.djgama.archerystore.repositories.ProductRepository;
 import org.springframework.stereotype.Service;
 
@@ -11,13 +12,19 @@ import java.util.Optional;
 @Service
 public class ProductService {
 	private final ProductRepository productRepo;
+	private final CategoryRepository categoryServ;
 
-	public ProductService(ProductRepository productRepo) {
+	public ProductService(ProductRepository productRepo, CategoryRepository categoryServ) {
 		this.productRepo = productRepo;
+		this.categoryServ = categoryServ;
 	}
 
 	public List<Product> findAll() {
 		return (List<Product>) productRepo.findAll();
+	}
+
+	public List<Product> findByCategory(Category category){
+		return productRepo.findAllByCategory_Id(category.getId());
 	}
 
 	public Product findOne(Long id) {
@@ -27,7 +34,7 @@ public class ProductService {
 		}else {
 			Product product = possibleProduct.get();
 			product.setDescription(refactorDescription(product.getDescription()));
-			System.out.println(product.getDescription());
+//			System.out.println(product.getDescription());
 			return product;
 		}
 	}

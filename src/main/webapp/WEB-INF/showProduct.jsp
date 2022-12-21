@@ -8,6 +8,7 @@
 <head>
     <meta charset="ISO-8859-1">
     <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://kit.fontawesome.com/38da9ec89a.js" crossorigin="anonymous"></script>
     <title>Product</title>
 </head>
 
@@ -18,7 +19,7 @@
                 Quiver Me This
             </a>
         </h1>
-        <div class="flex flex-row gap-1 justify-end">
+        <div class="flex flex-row gap-1 items-center">
             <a href="/" class="block text-white font-medium text-sm px-2 py-2 text-center">Home</a>
             <c:choose>
                 <c:when test="${sessionScope.user_id != null}">
@@ -28,6 +29,9 @@
                     <a href="/users/login/register" class="block text-white font-medium text-sm px-2 py-2 text-center">Login / Register</a>
                 </c:otherwise>
             </c:choose>
+            <a href="/users/cart">
+                <i class="fa-solid fa-cart-shopping text-white"></i>
+            </a>
         </div>
     </div>
     <div class="m-auto">
@@ -38,7 +42,7 @@
             <a href="/products/arrows" class="font-bold">
                 Arrows
             </a>
-            <a href="/products/targets" class="font-bold">
+            <a href="/products/archery%20targets" class="font-bold">
                 Targets
             </a>
         </div>
