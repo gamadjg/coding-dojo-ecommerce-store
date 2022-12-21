@@ -49,7 +49,7 @@ public class ProductController {
 		model.addAttribute("product", product);
 		model.addAttribute("descriptionList", descList);
 		model.addAttribute("newLogin", new LoginUser());
-		return "show-product.jsp";
+		return "showProduct.jsp";
 	}
 
 
