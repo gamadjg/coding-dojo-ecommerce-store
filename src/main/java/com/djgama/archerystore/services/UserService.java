@@ -1,8 +1,10 @@
 package com.djgama.archerystore.services;
 
+import com.djgama.archerystore.models.Cart;
 import com.djgama.archerystore.models.LoginUser;
 import com.djgama.archerystore.models.User;
-import com.djgama.archerystore.seeders.UserRepository;
+import com.djgama.archerystore.repositories.CartRepository;
+import com.djgama.archerystore.repositories.UserRepository;
 import org.mindrot.jbcrypt.BCrypt;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.BindingResult;
@@ -12,15 +14,22 @@ import java.util.Optional;
 @Service
 public class UserService {
 	private final UserRepository userRepo;
+	private final CartService cartServ;
 
-	public UserService(UserRepository userRepo) {
+	public UserService(UserRepository userRepo, CartService cartServ) {
 		this.userRepo = userRepo;
+		this.cartServ = cartServ;
 	}
 
 	public User registerUser(User user) {
 		String hashed = BCrypt.hashpw(user.getPassword(),BCrypt.gensalt());
 		user.setPassword(hashed);
-		return userRepo.save(user);
+		User newUser = userRepo.save(user);
+		Cart cart = new Cart();
+		cart.setName("shopping");
+		cart.setUser(getUser(newUser.getId()));
+		cartServ.persistOne(cart);
+		return newUser;
 	}
 
 	public User loginUser(LoginUser newLogin, BindingResult result) {

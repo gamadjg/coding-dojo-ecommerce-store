@@ -1,4 +1,4 @@
-package com.djgama.archerystore.seeders;
+package com.djgama.archerystore.repositories;
 
 import com.djgama.archerystore.models.User;
 import org.springframework.data.repository.CrudRepository;

@@ -37,8 +37,8 @@ public class User {
 	@DateTimeFormat(pattern="yyyy-MM-dd")
 	private Date updatedAt;
 
-//	@OneToMany(mappedBy="user", fetch = FetchType.LAZY)
-//	private List<Show> shows;
+	@OneToMany(mappedBy="user", fetch = FetchType.LAZY)
+	private List<Cart> carts;
 
 	public User() {}
 
