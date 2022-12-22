@@ -29,6 +29,7 @@ public class ProductController {
 		this.categoryServ = categoryServ;
 		this.userServ = userServ;
 	}
+
 	@GetMapping("")
 	public String allProducts(Model model, HttpSession session){
 		User user = new User();
@@ -52,7 +53,6 @@ public class ProductController {
 		model.addAttribute("newLogin", new LoginUser());
 		return "showProduct.jsp";
 	}
-
 
 	@GetMapping("/{category}")
 	public String getCategory(@PathVariable("category") String categoryName, Model model){

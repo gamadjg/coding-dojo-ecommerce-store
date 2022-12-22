@@ -34,7 +34,6 @@ public class ProductService {
 		}else {
 			Product product = possibleProduct.get();
 			product.setDescription(refactorDescription(product.getDescription()));
-//			System.out.println(product.getDescription());
 			return product;
 		}
 	}
