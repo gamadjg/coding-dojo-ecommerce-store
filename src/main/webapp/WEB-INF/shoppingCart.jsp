@@ -13,7 +13,7 @@
 </head>
 
 <body class="m-0 p-0">
-<div class="flex flex-row justify-between items-center bg-gray-700 pt-1 pb-1 pl-10 pr-10 w-screen">
+<div class="flex flex-row justify-between items-center bg-gray-700 pt-1 pb-1 pl-5 pr-5">
     <h1 class="text-4xl font-bold">
         <a href="/products" class="font-bold text-white">
             Quiver Me This
@@ -34,8 +34,8 @@
         </a>
     </div>
 </div>
-<div class="m-auto">
-    <div class="flex flex-row items-center items-center justify-center pl-3 pr-3 underline gap-5">
+<div class="m-auto flex justify-between pl-5 pt-2 pr-5">
+    <div class="flex flex-row  justify-start underline gap-5">
         <a href="/products/bows" class="font-bold">
             Bows
         </a>
@@ -46,23 +46,40 @@
             Targets
         </a>
     </div>
+    <form:form action="/products/removeFromCart/${product.id}" method="post" class="flex flex-col w-2/12">
+        <h2 class="font-bold text-xl">
+            Cart Total:
+        </h2>
+        <input type="hidden" name="_method" value="put" />
+        <button type="submit" class="w-full text-white focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center bg-blue-600 hover:bg-blue-700 focus:ring-blue-800">
+            checkout
+        </button>
+    </form:form>
 </div>
-<div class="grid grid-cols-1 w-10/12 ml-auto mr-auto mb-5 mt-5">
-    <div class="rounded overflow-hidden m-auto flex flex-col items-center">
-        <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
-            <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
-            <tr>
-                <th scope="col" class="py-4 px-6">col1</th>
-                <th scope="col" class="py-4 px-6">cal2</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
-                <td class="py-4 px-6">col1-data</td>
-                <td class="py-4 px-6">col2-data</td>
-            </tr>
-            </tbody>
+<%--<div class="flex flex grid-cols-2 w-10/12 ml-auto mr-auto mb-5 mt-5">--%>
+    <div class="overflow-hidden m-auto flex flex-col">
+        <c:forEach var="product" items="${products}">
+            <div class="border-b-2 pt-10 pb-10">
+                <div class="flex w-5/12 m-auto justify-start">
+                    <img class="max-w-xs" src="${product.imgLink}" alt="${product.name}">
+                    <div class="overflow-hidden flex flex-col items-start mt-10">
+                        <h2 class="font-bold text-xl mb-2">
+                            <c:out value="${product.name}" />
+                        </h2>
+                        <p class="font-bold text-xl mb-2 text-center">
+                            $<c:out value="${product.price}" />
+                        </p>
+                        <form:form action="/products/removeFromCart/${product.id}" method="post">
+                            <input type="hidden" name="_method" value="put" />
+                            <button type="submit" class="w-full text-white focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center bg-blue-600 hover:bg-blue-700 focus:ring-blue-800">
+                                Remove from Cart
+                            </button>
+                        </form:form>
+                    </div>
+                </div>
+            </div>
+        </c:forEach>
     </div>
-</div>
+<%--</div>--%>
 </body>
 </html>

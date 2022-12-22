@@ -17,7 +17,6 @@ public class Cart {
 	@NotEmpty(message = "Cart name cannot be empty")
 	private String name;
 
-
 	private Double total;
 
 	@ManyToOne(fetch = FetchType.LAZY)
