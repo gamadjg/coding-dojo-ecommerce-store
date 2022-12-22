@@ -3,7 +3,7 @@ package com.djgama.archerystore.models;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotEmpty;
 import java.util.Date;
 import java.util.List;
 
@@ -14,8 +14,9 @@ public class Cart {
 	@GeneratedValue(strategy= GenerationType.IDENTITY)
 	private Long id;
 
-	@NotBlank
+	@NotEmpty(message = "Cart name cannot be empty")
 	private String name;
+
 
 	private Double total;
 

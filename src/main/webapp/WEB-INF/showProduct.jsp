@@ -47,9 +47,11 @@
             </a>
         </div>
     </div>
-    <div class="grid grid-cols-1 w-10/12 ml-auto mr-auto mb-5 mt-5">
-        <div class="rounded overflow-hidden m-auto flex flex-col items-center">
+    <div class="flex w-10/12 ml-auto mr-auto mb-5 mt-5">
+        <div class="flex-1 rounded overflow-hidden m-auto flex flex-col items-center">
             <img class="max-w-md" src="${product.imgLink}" alt="bow merchandise">
+        </div>
+        <div class="flex-1 rounded overflow-hidden m-auto flex flex-col items-center">
             <div class="font-bold text-xl mb-2 text-center">
                 <c:out value="${product.name}" />
             </div>
@@ -64,18 +66,12 @@
                 </c:forEach>
             </ul>
             <form:form action="/products/addToCart/${product.id}" method="post">
-
-                <button type="submit" class="w-full text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Create Account</button>
+                <input type="hidden" name="_method" value="put" />
+                <button type="submit" class="w-full text-white focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center bg-blue-600 hover:bg-blue-700 focus:ring-blue-800">
+                    Add To Cart
+                </button>
             </form:form>
-
         </div>
     </div>
-<%--<c:if test="${show.user.name.equals(loggedInUser.name)}">--%>
-<%--    <a href="/shows/edit/<c:out value="${show.id}"/>" class="text-blue-500 mt-4">--%>
-<%--        <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">--%>
-<%--            Edit--%>
-<%--        </button>--%>
-<%--    </a>--%>
-<%--</c:if>--%>
 </body>
 </html>

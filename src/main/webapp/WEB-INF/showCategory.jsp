@@ -57,7 +57,7 @@
 </div>
 <div class="grid grid-cols-3 w-10/12 ml-auto mr-auto mb-5 mt-5 border-l-2 border-t-2">
     <c:forEach var="product" items="${products}">
-        <a href="/products/${product.id}" class="border-r-2 border-b-2  pl-5 pr-5">
+        <a href="/products/product/${product.id}" class="border-r-2 border-b-2  pl-5 pr-5">
             <div class="max-w-sm rounded overflow-hidden m-auto">
                 <img class="w-full" src="${product.imgLink}" alt="bow merchandise">
                 <div class="font-bold text-xl mb-2 text-center">

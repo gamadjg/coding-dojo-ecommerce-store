@@ -16,7 +16,7 @@ public class CartService {
 	}
 
 	public List<Cart> findAll() {
-		return (List<Cart>) cartRepo.findAll();
+		return cartRepo.findAll();
 	}
 
 	public Cart findOne(Long id) {
@@ -36,5 +36,7 @@ public class CartService {
 		cartRepo.deleteById(id);
 	}
 
-
+	public Cart findByUserId(Long id){
+		return cartRepo.findByUser_Id(id);
+	}
 }

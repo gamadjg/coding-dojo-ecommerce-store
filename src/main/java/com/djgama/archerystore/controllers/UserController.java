@@ -2,6 +2,7 @@ package com.djgama.archerystore.controllers;
 
 import com.djgama.archerystore.models.LoginUser;
 import com.djgama.archerystore.models.User;
+import com.djgama.archerystore.services.CartService;
 import com.djgama.archerystore.services.UserService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -18,9 +19,12 @@ import javax.validation.Valid;
 @RequestMapping("/users")
 public class UserController{
 	private final UserService userServ;
+	private final CartService cartServ;
 
-	public UserController(UserService userServ) {
+
+	public UserController(UserService userServ, CartService cartServ) {
 		this.userServ = userServ;
+		this.cartServ = cartServ;
 	}
 
 	@GetMapping("/cart")
@@ -42,17 +46,13 @@ public class UserController{
 		if(userServ.getUser(newUser.getEmail()) != null) {
 			result.rejectValue("email", "unique", "Email already exists.");
 		}
-
-		// Check passwords
 		if(!newUser.getPassword().equals(newUser.getConfirm())) {
 			result.rejectValue("password", "match", "Passwords do not match.");
 		}
-
 		if(result.hasErrors()) {
 			model.addAttribute("newLogin", new LoginUser());
 			return "loginReg.jsp";
 		}
-
 		User user = userServ.registerUser(newUser);
 		session.setAttribute("user_id", user.getId());
 		return "redirect:/";
